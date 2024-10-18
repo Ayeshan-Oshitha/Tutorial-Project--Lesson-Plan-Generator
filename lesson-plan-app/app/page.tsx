@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { features } from "@/constants";
+import { features, testimonials } from "@/constants";
 import Link from "next/link";
 
 export default function Home() {
@@ -16,6 +16,7 @@ export default function Home() {
       <MaxWidthWrapper>
         <HeroSection />
         <FeatureSection />
+        <TestimonailSection />
       </MaxWidthWrapper>
     </>
   );
@@ -63,5 +64,29 @@ function FeatureSection() {
       ))}
     </div>
   </div>
+  )
+}
+
+
+function TestimonailSection() {
+  return (
+    <div className="py-20">
+      <h2 className="text-3xl font-bold text-center mb-12">
+        What are educators saying?
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3  gap-8 mx-auto">
+        {testimonials.map((testimonail, index) => (
+          <Card key={index}>
+            <CardHeader>
+              <CardTitle>{testimonail.name}</CardTitle>
+              <CardDescription>{testimonail.role}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="italic">"{testimonail.quote}"</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
   )
 }
