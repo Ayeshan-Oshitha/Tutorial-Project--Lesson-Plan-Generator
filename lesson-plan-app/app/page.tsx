@@ -17,6 +17,7 @@ export default function Home() {
         <HeroSection />
         <FeatureSection />
         <TestimonailSection />
+         <CTASection />
       </MaxWidthWrapper>
     </>
   );
@@ -87,6 +88,22 @@ function TestimonailSection() {
           </Card>
         ))}
       </div>
+    </div>
+  )
+}
+
+function CTASection() {
+  return (
+    <div className="py-20 text-center">
+      <h2 className="text-3xl font-bold mb-6">
+        Ready to transform your lesson planning ?
+      </h2>
+      <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
+        Join hundreds of teachers who are already saving time when creating lesson palns with us.
+      </p>
+      <Link href="/pricing"
+      className={buttonVariants()}>
+      Start Creating Lessons now</Link>
     </div>
   )
 }
