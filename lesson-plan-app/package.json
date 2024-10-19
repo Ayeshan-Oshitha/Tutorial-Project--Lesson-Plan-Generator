@@ -2,6 +2,24 @@
   "name": "lesson-plan-app",
   "version": "0.1.0",
   "private": true,
+  "prettier": {
+    "printWidth": 120,
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

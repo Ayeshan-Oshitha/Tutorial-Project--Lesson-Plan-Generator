@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardFooter,
-  CardDescription,
-  CardTitle,
-} from "../ui/card";
+import { Card, CardContent, CardHeader, CardFooter, CardDescription, CardTitle } from "../ui/card";
 import { CheckIcon } from "lucide-react";
 import { Button } from "../ui/button";
 
@@ -39,10 +32,7 @@ const PricingCard: React.FC<Props> = ({ tier, index }: Props) => {
         </ul>
       </CardContent>
       <CardFooter>
-        <Button
-          className="w-full"
-          variant={index === 1 ? "default" : "outline"}
-        >
+        <Button className="w-full" variant={index === 1 ? "default" : "outline"}>
           {index === 0 ? "Get Started" : "Upgrade To Pro"}
         </Button>
       </CardFooter>
