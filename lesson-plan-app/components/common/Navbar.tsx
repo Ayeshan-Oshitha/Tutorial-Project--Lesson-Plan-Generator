@@ -4,6 +4,7 @@ import { Sparkles } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
 import MobileMenu from "./MobileMenu";
+import { LoginLink, LogoutLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 type Props = {};
 
@@ -25,12 +26,8 @@ const Navbar = (props: Props) => {
             </Link>
             {!user ? (
               <>
-                <Link href="/login" className={buttonVariants({ variant: "secondary" })}>
-                  Login
-                </Link>
-                <Link href="/register" className={buttonVariants()}>
-                  Sign Up
-                </Link>
+                <LoginLink className={buttonVariants({ variant: "secondary" })}>Login</LoginLink>
+                <RegisterLink className={buttonVariants()}>Sign Up</RegisterLink>
               </>
             ) : (
               <div className="flex items-center gap-2">
@@ -40,9 +37,7 @@ const Navbar = (props: Props) => {
                 <Link className={buttonVariants()} href="/create">
                   Create
                 </Link>
-                <Link href="/signout" className={buttonVariants({ variant: "ghost" })}>
-                  Signout
-                </Link>
+                <LogoutLink className={buttonVariants({ variant: "ghost" })}>Signout</LogoutLink>
               </div>
             )}
           </nav>

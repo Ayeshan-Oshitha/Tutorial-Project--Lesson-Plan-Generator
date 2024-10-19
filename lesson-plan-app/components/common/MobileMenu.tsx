@@ -4,6 +4,7 @@ import { useState } from "react";
 import { buttonVariants } from "../ui/button";
 import { Menu } from "lucide-react";
 import Link from "next/link";
+import { LoginLink, LogoutLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 interface Props {
   user: boolean;
@@ -23,12 +24,8 @@ const MobileMenu: React.FC<Props> = ({ user }: Props) => {
             </Link>
             {!user ? (
               <>
-                <Link href="/login" className={buttonVariants({ variant: "secondary" })}>
-                  Login
-                </Link>
-                <Link href="/register" className={buttonVariants()}>
-                  Sign Up
-                </Link>
+                <LoginLink className={buttonVariants({ variant: "secondary" })}>Login</LoginLink>
+                <RegisterLink className={buttonVariants()}>Sign Up</RegisterLink>
               </>
             ) : (
               <div className="flex items-center gap-2">
@@ -38,9 +35,7 @@ const MobileMenu: React.FC<Props> = ({ user }: Props) => {
                 <Link className={buttonVariants()} href="/create">
                   Create
                 </Link>
-                <Link href="/signout" className={buttonVariants({ variant: "ghost" })}>
-                  Signout
-                </Link>
+                <LogoutLink className={buttonVariants({ variant: "ghost" })}>Signout</LogoutLink>
               </div>
             )}
           </div>

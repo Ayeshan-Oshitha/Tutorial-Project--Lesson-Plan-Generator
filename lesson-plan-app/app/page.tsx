@@ -3,6 +3,7 @@ import PricingSection from "@/components/common/PricingSection";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { features, testimonials } from "@/constants";
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import Link from "next/link";
 
 export default function Home() {
