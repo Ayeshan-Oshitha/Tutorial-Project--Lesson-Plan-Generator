@@ -5,9 +5,10 @@ import { buttonVariants } from "../ui/button";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 import { LoginLink, LogoutLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
 
 interface Props {
-  user: boolean;
+  user: KindeUser<object>;
 }
 
 const MobileMenu: React.FC<Props> = ({ user }: Props) => {

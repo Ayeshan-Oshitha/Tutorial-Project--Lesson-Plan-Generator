@@ -5,11 +5,13 @@ import Link from "next/link";
 import { buttonVariants } from "../ui/button";
 import MobileMenu from "./MobileMenu";
 import { LoginLink, LogoutLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 type Props = {};
 
-const Navbar = (props: Props) => {
-  const user = false;
+const Navbar = async (props: Props) => {
+  const { getUser } = await getKindeServerSession();
+  const user = await getUser();
 
   return (
     <header>
