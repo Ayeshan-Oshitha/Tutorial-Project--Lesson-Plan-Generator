@@ -6,6 +6,7 @@ This project was developed by following a YouTube tutorial. The tutorial provide
 
 <br/>
 
+
 ## Features
 
 - **AI-Powered Lesson Plan Generation:** Users input their lesson objectives, and ChatGPT generates a detailed lesson plan based on the information provided.
