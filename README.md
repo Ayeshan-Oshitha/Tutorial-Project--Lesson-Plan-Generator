@@ -4,6 +4,8 @@ This project is an AI-powered lesson plan generator built with **Node.js 14**, *
 
 This project was developed by following a YouTube tutorial. The tutorial provided guidance on building the core features, and the application was further enhanced to include integration with ChatGPT for lesson plan generation.
 
+<br/>
+
 ## Features
 
 - **AI-Powered Lesson Plan Generation:** Users input their lesson objectives, and ChatGPT generates a detailed lesson plan based on the information provided.
@@ -11,6 +13,8 @@ This project was developed by following a YouTube tutorial. The tutorial provide
 - **Interactive UI:** The frontend is designed with a user-friendly interface, built using **Tailwind CSS** and **ShadCN** to ensure responsiveness and ease of use.
 - **Database Integration:** **Prisma** is used to manage and store lesson plans, ensuring smooth data handling and retrieval.
 - **Real-Time Interaction:** The application uses the power of **ChatGPT AI** to generate relevant and high-quality content for lesson planning.
+
+  <br/>
 
 ## Technologies Used
 
@@ -20,7 +24,9 @@ This project was developed by following a YouTube tutorial. The tutorial provide
 - **Prisma:** ORM (Object-Relational Mapping) used to interact with the database.
 - **ChatGPT AI (OpenAI):** Used for generating lesson plans based on user input and objectives.
 
-  ## UI Screenshots
+  <br/>
+
+## UI Screenshots
 
   ![img1](https://github.com/user-attachments/assets/c209f30c-d37c-4950-aa5e-1f70b4443de4)
 
