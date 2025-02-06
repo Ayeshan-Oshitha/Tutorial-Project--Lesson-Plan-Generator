@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
@@ -10,13 +10,9 @@ import { useRouter } from "next/navigation";
 import { subtopics, topics, durations, studentLevels } from "@/constants";
 import { useToast } from "@/hooks/use-toast";
 import { containerVariants, itemVariants } from "@/lib/animations";
-// import { CreateLessonPlan } from "@/app/create/actions";
+import { CreateLessonPlan } from "@/app/create/action";
 
-interface Props {
-  isSubscribed: boolean;
-}
-
-const LessonPlanForm: React.FC<Props> = ({ isSubscribed }: Props) => {
+const LessonPlanForm = ({ isSubscribed }: { isSubscribed: boolean }) => {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -46,7 +42,7 @@ const LessonPlanForm: React.FC<Props> = ({ isSubscribed }: Props) => {
       setFormData({
         ...formData,
         topic: value,
-        subtopic: " ",
+        subtopic: "",
       });
     } else if (field === "subtopic") {
       setCustomSubtopic("");
@@ -58,8 +54,8 @@ const LessonPlanForm: React.FC<Props> = ({ isSubscribed }: Props) => {
 
   const handleCustomTopicChange = (value: string) => {
     setCustomTopic(value);
-    setFormData({ ...formData, topic: " ", subtopic: " " });
-    setCustomSubtopic(" ");
+    setFormData({ ...formData, topic: "", subtopic: "" });
+    setCustomSubtopic("");
   };
 
   const handleCustomSubtopicChange = (value: string) => {
@@ -69,8 +65,8 @@ const LessonPlanForm: React.FC<Props> = ({ isSubscribed }: Props) => {
 
   const clearTopic = () => {
     setFormData({ ...formData, topic: "", subtopic: "" });
-    setCustomTopic("");
     setCustomSubtopic("");
+    setCustomTopic("");
   };
 
   const clearSubtopic = () => {
@@ -100,16 +96,19 @@ const LessonPlanForm: React.FC<Props> = ({ isSubscribed }: Props) => {
   const isFormComplete = () => {
     const { topic, subtopic, duration, studentLevel, objective } = formData;
     console.log(formData);
+
     let result;
+
     if (isSubscribed) {
       result =
-        ((customTopic !== " " && customSubtopic !== "") || (topic !== "" && subtopic !== "")) &&
+        ((customTopic !== "" && customSubtopic !== "") || (topic !== "" && subtopic !== "")) &&
         duration !== "" &&
         studentLevel !== "" &&
         objective !== "";
     } else {
-      result = topic !== "" && subtopic !== "" && duration !== "" && studentLevel !== "" && objective != " ";
+      result = topic !== "" && subtopic !== "" && duration !== "" && studentLevel !== "" && objective !== "";
     }
+
     return result;
   };
 
@@ -141,7 +140,7 @@ const LessonPlanForm: React.FC<Props> = ({ isSubscribed }: Props) => {
                     className="w-full"
                     disabled={formData.topic !== ""}
                   />
-                  <p className="text-sm text-gray-500">or Choose from predefined topics</p>
+                  <p className="text-sm text-gray-500">Or choose from predefined topics</p>
                 </div>
               )}
               {
@@ -176,7 +175,7 @@ const LessonPlanForm: React.FC<Props> = ({ isSubscribed }: Props) => {
               <h2 className="text-2xl font-bold">Select Subtopic</h2>
             </motion.div>
             <motion.div variants={itemVariants}>
-              {isSubscribed && customTopic !== " " && (
+              {isSubscribed && customTopic !== "" && (
                 <div className="space-y-4 mb-4">
                   <Input
                     placeholder="Enter custom subtopic"
@@ -292,6 +291,7 @@ const LessonPlanForm: React.FC<Props> = ({ isSubscribed }: Props) => {
     e.preventDefault();
     setIsLoading(true);
 
+    console.log("function callled 0");
     const formDataToSubmit = new FormData();
 
     Object.entries(formData).forEach(([key, value]) => {
@@ -305,29 +305,30 @@ const LessonPlanForm: React.FC<Props> = ({ isSubscribed }: Props) => {
 
     console.log("Form Data: ", Object.fromEntries(formDataToSubmit));
 
-    // try {
-    //   const response = await CreateLessonPlan(formDataToSubmit);
-    //   if (response.success) {
-    //     router.push("/dashboard");
-    //   } else {
-    //     toast({
-    //       title: "Something went wrong.",
-    //       description:
-    //         "An error occurred. This shouldn't happen. Try again later.",
-    //       variant: "destructive",
-    //     });
-    //   }
-
-    // } catch (error) {
-    //   toast({
-    //     title: "Something went wrong.",
-    //     description:
-    //       "An error occurred. This shouldn't happen. Try again later.",
-    //     variant: "destructive",
-    //   });
-    // } finally {
-    //   setIsLoading(false);
-    // }
+    try {
+      console.log("function callled a1.2");
+      const response = await CreateLessonPlan(formDataToSubmit);
+      console.log("function callled a2");
+      if (response.success) {
+        console.log("function callled a3");
+        router.push("/dashboard");
+      } else {
+        toast({
+          title: "Something went wrong.",
+          description: "An error occurred. This shouldn't happen. Try again later.",
+          variant: "destructive",
+        });
+      }
+      // make logic to submit form on backend
+    } catch (error) {
+      toast({
+        title: "Something went wrong.",
+        description: "An error occurred. This shouldn't happen. Try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const renderLoadingAnimation = () => {
@@ -396,8 +397,10 @@ const LessonPlanForm: React.FC<Props> = ({ isSubscribed }: Props) => {
   return (
     <Card className="relative overflow-hidden">
       <form onSubmit={handleSubmit}>
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 "></div>
-        <CardHeader className="text-3xl font-bold text-center text-gray-800">Lesson Planner</CardHeader>
+        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+        <CardHeader>
+          <CardTitle className="text-3xl font-bold text-center text-gray-800">Lesson Planner</CardTitle>
+        </CardHeader>
         <CardContent>
           <div className="mb-6 flex justify-center">
             {[1, 2, 3, 4, 5].map((i) => (
@@ -416,23 +419,30 @@ const LessonPlanForm: React.FC<Props> = ({ isSubscribed }: Props) => {
             {step < 5 ? (
               <Button
                 onClick={handleNext}
-                disabled={!isStepValid(step) || isLoading}
-                className={buttonVariants({ variant: "default", className: "ml-auto" })}
+                disabled={!isStepValid(step)}
+                className={buttonVariants({
+                  variant: "default",
+                  className: "ml-auto",
+                })}
                 type="button"
               >
                 Next
               </Button>
             ) : (
-              <motion.div>
-                <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white" disabled={!isFormComplete()}>
+              <motion.div className="ml-auto">
+                <Button
+                  type="submit"
+                  className="bg-green-500 hover:bg-green-600 text-white"
+                  disabled={!isFormComplete() || isLoading}
+                >
                   <Sparkles className="w-4 h-4 mr-2" />
-                  Generate Lesson Plans
+                  Generate Lesson Plan
                 </Button>
               </motion.div>
             )}
           </motion.div>
         </CardContent>
-        {isLoading && renderLoadingAnimation()}
+        <AnimatePresence>{isLoading && renderLoadingAnimation()}</AnimatePresence>
       </form>
     </Card>
   );
